@@ -1,24 +1,17 @@
-const minhaPromise = () =>
-    new Promise((resolve, reject) => {
-        setTimeout(() => resolve('OK'), 4000);
-    });
+import axios from 'axios';
 
-    minhaPromise().then((response) => {
+class Api {
+    static async getUser(username) {
+        try {
+        const response = await axios.get(
+            `https://api.github.com/users/${username}`
+        );
         console.log('response', response);
-    }).catch((error) => {
-        console.log('error', error);
-    })
-
-async function executaPromise() {
-    const response = await minhaPromise();
-    console.log('response async', response);
-}
-executaPromise();
-
-const executaPromise2 = async () => {
-    console.log('response async 2', await minhaPromise());
-    console.log('response async 3', await minhaPromise());
-    console.log('response async 4', await minhaPromise());
+        } catch (error) {
+            console.warn('Erro na requisição: ', error);
+        }
+    }
 }
 
-executaPromise2();
+Api.getUser('alisonbessa');
+Api.getUser('aalliissoonnbbeessaa');
